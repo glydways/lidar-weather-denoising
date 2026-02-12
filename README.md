@@ -2,8 +2,30 @@
 
 This repo contains ML-based LiDAR denoising experiments to remove weather clutter (rain, snow, fog).
 
-**Dataset:** DENSE, CADC, WADS. See [scripts/data_playground.ipynb](scripts/data_playground.ipynb) for exploration.
-For evaluation, we use snow machine data collect in NYNJ at 2026/1/20 ([catalog link](https://catalog.tbdrobotics.com/artifact/2a0c8569-8a4c-4dd7-836f-d7f66631c2e8)).
+**Datasets:** [DENSE](https://www.uni-ulm.de/en/in/driveu/projects/dense-dataset/) (rain), [CADC](http://cadcd.uwaterloo.ca/) (winter), [WADS](https://digitalcommons.mtu.edu/wads/) (snow). See [scripts/data_playground.ipynb](scripts/data_playground.ipynb) for exploration.
+For evaluation, we use snow machine data collected in NYNJ at 2026/1/20 ([catalog link](https://catalog.tbdrobotics.com/artifact/2a0c8569-8a4c-4dd7-836f-d7f66631c2e8)).
+
+We use the following `dataset/` layout (local only; not in repo due to size; download them with the link above):
+
+```
+dataset/
+├── cadc/
+│   └── cadcd/               # 2018_03_06/, 2018_03_07/, 2019_02_27/, ... (date/route → labeled/, lidar_points/, etc.)
+├── dense/
+│   ├── train_01/
+│   ├── train_02/
+│   ├── val_01/
+│   ├── test_01/
+│   ├── test_road_01/
+│   ├── test_road_02/
+│   └── ...                  # DENSE HDF5 (native for WeatherNet)
+├── glyd/
+│   └── glyd_snow_bin/       # Bin file generated from autolabeling tool
+└── wads/
+    ├── wads_hdf5/           # 11_20211109T212945Z_001/, 15_..., 22_..., 30_..., ... (WeatherNet)
+    ├── wads_original_bin/   # same seq names; .bin + .label (flatten for LiSnowNet)
+    └── ...
+```
 
 **Data format note:** WeatherNet uses range images in HDF5; LiSnowNet uses raw Velodyne `.bin`. bin→HDF5: [scripts/velodyne_bin_to_hdf5.py](scripts/velodyne_bin_to_hdf5.py).
 
