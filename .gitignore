@@ -1,0 +1,18 @@
+# dataset
+dataset/
+
+# large files (any depth)
+**/checkpoints*
+**/logs*
+**/out*
+
+# Python
+__pycache__/
+*.pyc
+*.pyo
+
+# IDE
+.idea/
+
+# other files
+note.md
